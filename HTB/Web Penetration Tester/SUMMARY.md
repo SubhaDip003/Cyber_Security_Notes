@@ -61,3 +61,6 @@
   * [5.4 Recursive Fuzzing](5.-web-fuzzing/5.4-recursive-fuzzing.md)
   * [5.5 Parameter and Value Fuzzing](5.-web-fuzzing/5.5-parameter-and-value-fuzzing.md)
   * [5.6 Virtual Host and Subdomain Fuzzing](5.-web-fuzzing/5.6-virtual-host-and-subdomain-fuzzing.md)
+  * [5.7 Filtering Fuzzing Output](5.-web-fuzzing/5.7-filtering-fuzzing-output.md)
+  * [5.8 Validating Findings](5.-web-fuzzing/5.8-validating-findings.md)
+  * [5.9 Web APIs](5.-web-fuzzing/5.9-web-apis.md)
