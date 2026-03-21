@@ -57,3 +57,5 @@
 * [5. Web Fuzzing](5.-web-fuzzing/README.md)
   * [5.1 Introduction](5.-web-fuzzing/5.1-introduction.md)
   * [5.2 Tooling](5.-web-fuzzing/5.2-tooling.md)
+  * [5.3 Directory and File Fuzzing](5.-web-fuzzing/5.3-directory-and-file-fuzzing.md)
+  * [5.4 Recursive Fuzzing](5.-web-fuzzing/5.4-recursive-fuzzing.md)
