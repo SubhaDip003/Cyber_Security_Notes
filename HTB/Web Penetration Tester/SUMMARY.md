@@ -56,3 +56,4 @@
   * [4.15 Automating Recon](4.-information-gathering-web-edition/4.16-automating-recon.md)
 * [5. Web Fuzzing](5.-web-fuzzing/README.md)
   * [5.1 Introduction](5.-web-fuzzing/5.1-introduction.md)
+  * [5.2 Tooling](5.-web-fuzzing/5.2-tooling.md)
