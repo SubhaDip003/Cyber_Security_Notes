@@ -64,3 +64,5 @@
   * [5.7 Filtering Fuzzing Output](5.-web-fuzzing/5.7-filtering-fuzzing-output.md)
   * [5.8 Validating Findings](5.-web-fuzzing/5.8-validating-findings.md)
   * [5.9 Web APIs](5.-web-fuzzing/5.9-web-apis.md)
+  * [5.10 Identifying Endpoints](5.-web-fuzzing/5.10-identifying-endpoints.md)
+  * [5.11 API Fuzzing](5.-web-fuzzing/5.11-api-fuzzing.md)
