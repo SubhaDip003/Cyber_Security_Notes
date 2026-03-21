@@ -59,3 +59,4 @@
   * [5.2 Tooling](5.-web-fuzzing/5.2-tooling.md)
   * [5.3 Directory and File Fuzzing](5.-web-fuzzing/5.3-directory-and-file-fuzzing.md)
   * [5.4 Recursive Fuzzing](5.-web-fuzzing/5.4-recursive-fuzzing.md)
+  * [5.5 Parameter and Value Fuzzing](5.-web-fuzzing/5.5-parameter-and-value-fuzzing.md)
