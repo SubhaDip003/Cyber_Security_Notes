@@ -66,3 +66,5 @@
   * [5.9 Web APIs](5.-web-fuzzing/5.9-web-apis.md)
   * [5.10 Identifying Endpoints](5.-web-fuzzing/5.10-identifying-endpoints.md)
   * [5.11 API Fuzzing](5.-web-fuzzing/5.11-api-fuzzing.md)
+* [6. JavaScript Deobfuscation](6.-javascript-deobfuscation/README.md)
+  * [6.1 Introduction](6.-javascript-deobfuscation/6.1-introduction.md)
