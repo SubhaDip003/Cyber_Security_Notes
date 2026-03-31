@@ -69,3 +69,4 @@
 * [6. JavaScript Deobfuscation](6.-javascript-deobfuscation/README.md)
   * [6.1 Introduction](6.-javascript-deobfuscation/6.1-introduction.md)
   * [6.2 Source Code](6.-javascript-deobfuscation/6.2-source-code.md)
+  * [6.3 Code Obfuscation](6.-javascript-deobfuscation/6.3-code-obfuscation.md)
