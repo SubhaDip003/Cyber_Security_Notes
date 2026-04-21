@@ -73,3 +73,4 @@
   * [6.4 Basic Obfuscation](6.-javascript-deobfuscation/6.4-basic-obfuscation.md)
   * [6.5 Advanced Obfuscation](6.-javascript-deobfuscation/6.5-advanced-obfuscation.md)
   * [6.6 Deobfuscation](6.-javascript-deobfuscation/6.6-deobfuscation.md)
+  * [6.7 Code Analysis](6.-javascript-deobfuscation/6.7-code-analysis.md)
