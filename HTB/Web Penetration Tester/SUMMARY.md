@@ -70,3 +70,4 @@
   * [6.1 Introduction](6.-javascript-deobfuscation/6.1-introduction.md)
   * [6.2 Source Code](6.-javascript-deobfuscation/6.2-source-code.md)
   * [6.3 Code Obfuscation](6.-javascript-deobfuscation/6.3-code-obfuscation.md)
+  * [6.4 Basic Obfuscation](6.-javascript-deobfuscation/6.4-basic-obfuscation.md)
