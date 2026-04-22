@@ -75,4 +75,6 @@
   * [6.6 Deobfuscation](6.-javascript-deobfuscation/6.6-deobfuscation.md)
   * [6.7 Code Analysis](6.-javascript-deobfuscation/6.7-code-analysis.md)
   * [6.8 Decoding](6.-javascript-deobfuscation/6.8-decoding.md)
-* [7. SQL Injection Fundamentals](7.-sql-injection-fundamentals.md)
+* [7. SQL Injection Fundamentals](7.-sql-injection-fundamentals/README.md)
+  * [7.1 Introduction](7.-sql-injection-fundamentals/7.1-introduction.md)
+  * [7.2 Intro to Databases](7.-sql-injection-fundamentals/7.2-intro-to-databases.md)
