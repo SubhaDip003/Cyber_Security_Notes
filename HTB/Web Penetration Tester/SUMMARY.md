@@ -80,3 +80,4 @@
   * [7.2 Intro to Databases](7.-sql-injection-fundamentals/7.2-intro-to-databases.md)
   * [7.3 Types of Databases](7.-sql-injection-fundamentals/7.3-types-of-databases.md)
   * [7.4 Intro to MySQL](7.-sql-injection-fundamentals/7.4-intro-to-mysql.md)
+  * [7.5 SQL Statements](7.-sql-injection-fundamentals/7.5-sql-statements.md)
