@@ -83,3 +83,4 @@
   * [7.5 SQL Statements](7.-sql-injection-fundamentals/7.5-sql-statements.md)
   * [7.6 Query Results](7.-sql-injection-fundamentals/7.6-query-results.md)
   * [7.7 SQL Operators](7.-sql-injection-fundamentals/7.7-sql-operators.md)
+  * [7.8 Intro to SQL Injections](7.-sql-injection-fundamentals/7.8-intro-to-sql-injections.md)
