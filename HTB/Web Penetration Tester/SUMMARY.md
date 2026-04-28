@@ -82,3 +82,4 @@
   * [7.4 Intro to MySQL](7.-sql-injection-fundamentals/7.4-intro-to-mysql.md)
   * [7.5 SQL Statements](7.-sql-injection-fundamentals/7.5-sql-statements.md)
   * [7.6 Query Results](7.-sql-injection-fundamentals/7.6-query-results.md)
+  * [7.7 SQL Operators](7.-sql-injection-fundamentals/7.7-sql-operators.md)
