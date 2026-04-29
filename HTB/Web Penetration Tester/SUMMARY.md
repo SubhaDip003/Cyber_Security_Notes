@@ -85,3 +85,4 @@
   * [7.7 SQL Operators](7.-sql-injection-fundamentals/7.7-sql-operators.md)
   * [7.8 Intro to SQL Injections](7.-sql-injection-fundamentals/7.8-intro-to-sql-injections.md)
   * [7.9 Subverting Query Logic](7.-sql-injection-fundamentals/7.9-subverting-query-logic.md)
+  * [7.10 Using Comments](7.-sql-injection-fundamentals/7.10-using-comments.md)
