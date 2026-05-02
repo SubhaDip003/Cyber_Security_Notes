@@ -90,3 +90,4 @@
   * [8.12 Union Injection](8.-sql-injection-fundamentals/8.12-union-injection.md)
   * [8.13 Database Enumeration](8.-sql-injection-fundamentals/8.13-database-enumeration.md)
   * [8.14 Reading Files](8.-sql-injection-fundamentals/8.14-reading-files.md)
+  * [8.15 Writing Files](8.-sql-injection-fundamentals/8.15-writing-files.md)
