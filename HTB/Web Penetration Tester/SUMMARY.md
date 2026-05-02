@@ -88,3 +88,4 @@
   * [8.10 Using Comments](8.-sql-injection-fundamentals/8.10-using-comments.md)
   * [8.11 Union Clause](8.-sql-injection-fundamentals/8.11-union-clause.md)
   * [8.12 Union Injection](8.-sql-injection-fundamentals/8.12-union-injection.md)
+  * [8.13 Database Enumeration](8.-sql-injection-fundamentals/8.13-database-enumeration.md)
