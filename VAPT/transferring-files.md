@@ -114,7 +114,7 @@ Also we can use MD5 hash by using `md5sum` command to validate the file from com
 
 ***
 
-Medhod-5: Download and Upload files to Windows Machine using BITSAdmin
+## Medhod-5: Download and Upload files to Windows Machine using BITSAdmin
 
 ```powershell
 bitsadmin /transfer <filename> http://<IP>:<PORT>/<filename> <upload_location>
