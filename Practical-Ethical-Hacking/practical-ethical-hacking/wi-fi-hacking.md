@@ -28,7 +28,7 @@ ifconfig
 ```
 
 
-![image 30](../../attachments/image-30.png)
+![image 30](../../attachments/Practical-Ethical-Hacking-Images/image-30.png)
 
 
 

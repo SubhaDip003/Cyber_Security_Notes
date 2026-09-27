@@ -34,7 +34,7 @@ denial-of-service to additional requests.
 The tool use perfectly legitimate HTTP traffic. The tool is very useful for security testing.
 
 
-![image 779828af](../../attachments/image-779828af.png)
+![image 779828af](../../attachments/Practical-Ethical-Hacking-Images/image-779828af.png)
 
 
 ### Installation
@@ -47,7 +47,7 @@ sudo git clone https://github.com/ngrok90/xerxes.git
 ```
 
 
-![image 779828af](../../attachments/image-779828af.png)
+![image 779828af](../../attachments/Practical-Ethical-Hacking-Images/image-779828af.png)
 
 
 Step 2: Now use the following command to move into the directory of the tool.
@@ -57,7 +57,7 @@ cd xerxes
 ```
 
 
-![image 1](../../attachments/image-1.png)
+![image 1](../../attachments/Practical-Ethical-Hacking-Images/image-1.png)
 
 
 Step 3: Now you are in the directory of the tool. Use the following command to start Dos attack.<br>
@@ -67,7 +67,7 @@ Step 3: Now you are in the directory of the tool. Use the following command to s
 ```
 
 
-![image 2](../../attachments/image-2.png)
+![image 2](../../attachments/Practical-Ethical-Hacking-Images/image-2.png)
 
 
 The tool is running successfully and attacking on the domain.
@@ -90,5 +90,5 @@ protect yourself and your services. Most common mitigation techniques work by
 ### Design Structure of DDoS
 
 
-![image 3](../../attachments/image-3.png)
+![image 3](../../attachments/Practical-Ethical-Hacking-Images/image-3.png)
 
