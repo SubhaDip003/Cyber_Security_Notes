@@ -27,7 +27,9 @@ Step 1: <mark style="color:$info;">`ifconfig`</mark> (interface configuration): 
 ifconfig
 ```
 
-<figure><img src="../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+
+![image 30](../../attachments/image-30.png)
+
 
 
 

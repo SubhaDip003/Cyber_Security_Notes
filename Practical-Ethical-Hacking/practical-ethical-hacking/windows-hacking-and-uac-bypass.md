@@ -25,7 +25,9 @@ layout:
 
 
 
-<figure><img src="../.gitbook/assets/Windows Hacking Attack Senario.png" alt=""><figcaption></figcaption></figure>
+
+![Windows Hacking Attack Senario](../../attachments/Windows-Hacking-Attack-Senario.png)
+
 
 > Run the following command on the target system to enable Network sharing:
 >

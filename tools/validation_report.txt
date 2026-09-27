@@ -1,0 +1,32 @@
+VALIDATION REPORT
+=================
+markdown_files_scanned: 156
+markdown_image_references: 510
+broken_count: 0
+remaining_gitbook_count: 0
+html_img_count: 0
+duplicate_count: 0
+attachments_total: 512
+broken_image_references (first 20): []
+remaining_gitbook (first 10): []
+wikilink_images: []
+html_img_remaining: 0
+duplicate_attachment_files: 0
+problematic_filenames: []
+---JSON---
+{
+  "markdown_files_scanned": 156,
+  "markdown_image_references": 510,
+  "broken_image_references": [],
+  "broken_count": 0,
+  "remaining_gitbook_references": [],
+  "remaining_gitbook_count": 0,
+  "wikilink_images": [],
+  "html_img_tags": [],
+  "html_img_count": 0,
+  "images_not_under_attachments": [],
+  "duplicate_attachment_files": [],
+  "duplicate_count": 0,
+  "problematic_attachment_filenames": [],
+  "attachments_total": 512
+}
