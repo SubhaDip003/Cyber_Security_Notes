@@ -92,3 +92,11 @@
   * [8.14 Reading Files](8.-sql-injection-fundamentals/8.14-reading-files.md)
   * [8.15 Writing Files](8.-sql-injection-fundamentals/8.15-writing-files.md)
   * [8.16 Mitigating SQL Injection](8.-sql-injection-fundamentals/8.16-mitigating-sql-injection.md)
+
+---
+
+## Vault
+
+- [[README|Cyber_Security_Notes]]
+- [[AD PenTesting|Active Directory Penetration Testing]]
+- [[AI LLM Security|AI & LLM Security]]
