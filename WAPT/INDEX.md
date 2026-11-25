@@ -3,7 +3,7 @@
 Navigation only — note bodies are not modified.
 
 ## Vault
-- [[../README|Cyber_Security_Notes]]
+- [Cyber_Security_Notes](../README.md)
 
 ## Entry points
 - _(none yet)_
@@ -11,18 +11,19 @@ Navigation only — note bodies are not modified.
 ## Status
 
 Placeholder for future **Web Application Penetration Testing** notes.
-Related material today lives under [[../HTB/WEB PENETRATION TESTER/WEB PENETRATION TESTER|HTB — Web Penetration Tester]].
+
+- [HTB — Web Penetration Tester (current material)](../HTB/WEB%20PENETRATION%20TESTER/WEB%20PENETRATION%20TESTER.md)
 
 ## Vault maintenance
 
-- [[../vault-sessions/README|vault-sessions — structural scripts]]
+- [vault-sessions — structural scripts](../vault-sessions/README.md)
 
 ## Other topics
 
-- [[../AD-PenTest/INDEX|AD-PenTest]]
-- [[../AI-LLM-Security/INDEX|AI-LLM-Security]]
-- [[../Cloud Security/INDEX|Cloud Security]]
-- [[../HTB/INDEX|HTB]]
-- [[../Practical-Ethical-Hacking/INDEX|Practical-Ethical-Hacking]]
-- [[../tools/INDEX|tools]]
-- [[../VAPT/INDEX|VAPT]]
+- [AD-PenTest](../AD-PenTest/INDEX.md)
+- [AI-LLM-Security](../AI-LLM-Security/INDEX.md)
+- [Cloud Security](../Cloud%20Security/INDEX.md)
+- [HTB](../HTB/INDEX.md)
+- [Practical-Ethical-Hacking](../Practical-Ethical-Hacking/INDEX.md)
+- [tools](../tools/INDEX.md)
+- [VAPT](../VAPT/INDEX.md)

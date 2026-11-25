@@ -3,30 +3,30 @@
 Navigation only — note bodies are not modified.
 
 ## Vault
-- [[../README|Cyber_Security_Notes]]
+- [Cyber_Security_Notes](../README.md)
 
 ## Entry points
-- [[README|Landing (README)]]
-- [[SUMMARY|GitBook-style SUMMARY]]
+- [Landing (README)](README.md)
+- [GitBook SUMMARY](SUMMARY.md)
 
 ## All notes
 
 ## Top level
-- [[privilege-escalation]]
-- [[SUMMARY]]
-- [[transferring-files]]
-- [[types-of-shells]]
+- [Privilege Escalation](privilege-escalation.md)
+- [Summary](SUMMARY.md)
+- [Transferring Files](transferring-files.md)
+- [Types of Shells](types-of-shells.md)
 
 ## Vault maintenance
 
-- [[../vault-sessions/README|vault-sessions — structural scripts]]
+- [vault-sessions — structural scripts](../vault-sessions/README.md)
 
 ## Other topics
 
-- [[../AD-PenTest/INDEX|AD-PenTest]]
-- [[../AI-LLM-Security/INDEX|AI-LLM-Security]]
-- [[../Cloud Security/INDEX|Cloud Security]]
-- [[../HTB/INDEX|HTB]]
-- [[../Practical-Ethical-Hacking/INDEX|Practical-Ethical-Hacking]]
-- [[../tools/INDEX|tools]]
-- [[../WAPT/INDEX|WAPT]]
+- [AD-PenTest](../AD-PenTest/INDEX.md)
+- [AI-LLM-Security](../AI-LLM-Security/INDEX.md)
+- [Cloud Security](../Cloud%20Security/INDEX.md)
+- [HTB](../HTB/INDEX.md)
+- [Practical-Ethical-Hacking](../Practical-Ethical-Hacking/INDEX.md)
+- [tools](../tools/INDEX.md)
+- [WAPT](../WAPT/INDEX.md)

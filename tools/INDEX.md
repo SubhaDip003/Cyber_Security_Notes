@@ -3,27 +3,27 @@
 Navigation only — note bodies are not modified.
 
 ## Vault
-- [[../README|Cyber_Security_Notes]]
+- [Cyber_Security_Notes](../README.md)
 
 ## Entry points
-- [[README|About this folder]]
+- [About this folder](README.md)
 
 ## Security tool notes
 
 _Add per-tool or cheat-sheet notes here as you create them._
 
-Vault automation: [[../vault-sessions/README|vault-sessions]]
+- [vault-sessions](../vault-sessions/README.md)
 
 ## Vault maintenance
 
-- [[../vault-sessions/README|vault-sessions — structural scripts]]
+- [vault-sessions — structural scripts](../vault-sessions/README.md)
 
 ## Other topics
 
-- [[../AD-PenTest/INDEX|AD-PenTest]]
-- [[../AI-LLM-Security/INDEX|AI-LLM-Security]]
-- [[../Cloud Security/INDEX|Cloud Security]]
-- [[../HTB/INDEX|HTB]]
-- [[../Practical-Ethical-Hacking/INDEX|Practical-Ethical-Hacking]]
-- [[../VAPT/INDEX|VAPT]]
-- [[../WAPT/INDEX|WAPT]]
+- [AD-PenTest](../AD-PenTest/INDEX.md)
+- [AI-LLM-Security](../AI-LLM-Security/INDEX.md)
+- [Cloud Security](../Cloud%20Security/INDEX.md)
+- [HTB](../HTB/INDEX.md)
+- [Practical-Ethical-Hacking](../Practical-Ethical-Hacking/INDEX.md)
+- [VAPT](../VAPT/INDEX.md)
+- [WAPT](../WAPT/INDEX.md)

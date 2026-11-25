@@ -1,7 +1,10 @@
-"""Generate INDEX.md navigation files per topic (wikilinks only; no note body edits)."""
+"""Generate INDEX.md navigation files (Markdown links for GitHub + Obsidian)."""
 from __future__ import annotations
 
+import os
+import re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -26,7 +29,46 @@ SKIP_DIRS = {
 }
 SKIP_FILES = {"INDEX.md"}
 
-VAULT_LINK = "- [[../README|Cyber_Security_Notes]]"
+# Folder segments omitted or shortened in INDEX headings (paths unchanged on disk).
+SEGMENT_SKIP = frozenset(
+    {
+        "active-directory-penetration-testing-and-redteaming",
+        "practical-ethical-hacking",
+    }
+)
+
+SEGMENT_LABEL = {
+    "active-directory-penetration-testing-complete-guide": "Complete guide",
+    "active-directory-penetration-testing-lab-setup": "Lab setup",
+    "windows-authentication-methods": "Authentication methods",
+    "WEB PENETRATION TESTER": "Web Penetration Tester",
+    "CWL": "CWL",
+    "AI Security Fundamentals": "AI Security Fundamentals",
+    "Cloud Security Fundamentals": "Cloud Security Fundamentals",
+    "1. Modern AI Fundamentals": "1 — Modern AI",
+    "2. AI Security Fundamentals": "2 — AI security",
+    "1. Intro": "1 — Intro",
+}
+
+MODULE_SHORT = {
+    "reconnaissance-techniques-in-active-directory-and-gaining-access": "Reconnaissance & access",
+    "credential-harvesting-in-active-directory": "Credential harvesting",
+    "privilege-escalation-in-active-directory": "Privilege escalation",
+    "local-privilege-escalation-techniques": "Local privilege escalation",
+    "linux-abuse": "Linux — DACL abuse",
+    "windows-abuse": "Windows — DACL abuse",
+    "llmnr-nbt-ns-poisoning": "LLMNR / NBT-NS poisoning",
+    "kerberos-pre-authentication-not-required-asreproasting": "AS-REP roasting",
+    "1.5-kerberoasting": "Kerberoasting",
+    "1.6-bloodhound": "BloodHound",
+    "1.-web-request": "1 — HTTP & web requests",
+    "2.-introduction-to-web-applications": "2 — Web applications",
+    "3.-using-web-proxies": "3 — Web proxies",
+    "4.-information-gathering-web-edition": "4 — Information gathering",
+    "5.-web-fuzzing": "5 — Web fuzzing",
+    "6.-javascript-deobfuscation": "6 — JavaScript deobfuscation",
+    "8.-sql-injection-fundamentals": "8 — SQL injection",
+}
 
 TOPIC_TITLES = {
     "AD-PenTest": "AD-PenTest",
@@ -39,55 +81,146 @@ TOPIC_TITLES = {
     "WAPT": "WAPT",
 }
 
-TOPIC_ENTRY = {
+TOPIC_ENTRY: dict[str, list[tuple[str, str]]] = {
     "AD-PenTest": [
-        "- [[README|Landing (README)]]",
-        "- [[AD PenTesting|GitBook-style table of contents]]",
+        ("README.md", "Landing (README)"),
+        ("AD PenTesting.md", "Full table of contents (GitBook style)"),
     ],
     "AI-LLM-Security": [
-        "- [[AI LLM Security|Map of content]]",
-        "- [[CWL/README|CWL — index]]",
+        ("AI LLM Security.md", "Map of content"),
+        ("CWL/README.md", "CWL index"),
     ],
     "Cloud Security": [
-        "- [[CWL/Cloud Security Fundamentals/1. Intro/1.1 Introduction to Cloud Computing & Cloud Security Fundamentals|1.1 Cloud Security Fundamentals]]",
+        (
+            "CWL/Cloud Security Fundamentals/1. Intro/1.1 Introduction to Cloud Computing & Cloud Security Fundamentals.md",
+            "1.1 Cloud security fundamentals",
+        ),
     ],
     "HTB": [
-        "- [[README|HTB landing]]",
-        "- [[WEB PENETRATION TESTER/WEB PENETRATION TESTER|Web Penetration Tester — TOC]]",
+        ("README.md", "HTB landing"),
+        ("WEB PENETRATION TESTER/WEB PENETRATION TESTER.md", "Web Penetration Tester — TOC"),
     ],
     "Practical-Ethical-Hacking": [
-        "- [[README|Landing (README)]]",
-        "- [[SUMMARY|GitBook-style SUMMARY]]",
+        ("README.md", "Landing (README)"),
+        ("SUMMARY.md", "GitBook SUMMARY"),
     ],
     "VAPT": [
-        "- [[README|Landing (README)]]",
-        "- [[SUMMARY|GitBook-style SUMMARY]]",
+        ("README.md", "Landing (README)"),
+        ("SUMMARY.md", "GitBook SUMMARY"),
     ],
-    "tools": ["- [[README|About this folder]]"],
+    "tools": [("README.md", "About this folder")],
     "WAPT": [],
 }
 
 
-def vault_rel_link(md: Path, topic_root: Path) -> str:
-    rel = md.relative_to(topic_root).with_suffix("")
-    parts = rel.parts
-    if len(parts) == 1:
-        name = parts[0]
-        return f"- [[{name}]]"
-    path = "/".join(parts)
-    display = parts[-1]
-    return f"- [[{path}|{display}]]"
+def md_link(index_file: Path, target: Path, label: str) -> str:
+    rel = os.path.relpath(target, index_file.parent).replace("\\", "/")
+    href = quote(rel, safe="/:")
+    return f"- [{label}]({href})"
 
 
-def section_heading(path: Path, topic_root: Path) -> str:
+def humanize_words(text: str) -> str:
+    text = text.replace("_", "-")
+    text = re.sub(r"[.\-]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return text
+    small = {"and", "or", "with", "in", "on", "to", "of", "for", "vs", "using", "over"}
+    words = text.split()
+    out: list[str] = []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if lw in {
+            "uac", "llmnr", "nbt", "ns", "ntlm", "dacl", "dc", "api", "http", "https", "sql", "xss", "csrf",
+            "vmware", "netexec", "powershell", "powersploit",
+        }:
+            if lw == "vmware":
+                out.append("VMware")
+                continue
+            if lw == "netexec":
+                out.append("NetExec")
+                continue
+            if lw in {"powershell", "powersploit"}:
+                out.append(lw.capitalize())
+                continue
+            out.append(lw.upper() if len(lw) <= 4 else lw.capitalize())
+        elif i > 0 and lw in small:
+            out.append(lw)
+        else:
+            out.append(lw.capitalize())
+    return " ".join(out)
+
+
+def humanize_stem(stem: str) -> str:
+    if stem in MODULE_SHORT:
+        return MODULE_SHORT[stem]
+    if " " in stem and "-" not in stem:
+        return stem
+    m = re.match(r"^(\d+(?:\.\d+)*)\s*[-.]?\s*(.+)$", stem)
+    if m:
+        num, rest = m.group(1), m.group(2).strip()
+        short = MODULE_SHORT.get(rest, humanize_words(rest))
+        return f"{num} {short}"
+    return humanize_words(stem)
+
+
+def stem_sort_key(stem: str) -> tuple:
+    parts: list = []
+    for chunk in re.split(r"(\d+)", stem):
+        if not chunk:
+            continue
+        parts.append(int(chunk) if chunk.isdigit() else chunk.lower())
+    return tuple(parts)
+
+
+def folder_label(segment: str) -> str | None:
+    if segment in SEGMENT_SKIP:
+        return None
+    if segment in SEGMENT_LABEL:
+        return SEGMENT_LABEL[segment]
+    if segment in MODULE_SHORT:
+        return MODULE_SHORT[segment]
+    m = re.match(r"^(\d+)\.-(.+)$", segment)
+    if m:
+        num, rest = m.group(1), m.group(2)
+        short = MODULE_SHORT.get(rest, humanize_words(rest))
+        return f"{num}. {short}"
+    m = re.match(r"^(\d+(?:\.\d+)*)\s*[-.]?\s*(.+)$", segment)
+    if m:
+        return humanize_stem(segment)
+    return humanize_words(segment)
+
+
+def section_heading(path: Path, topic_root: Path) -> tuple[str, tuple[int, ...]]:
     rel = path.relative_to(topic_root)
     if rel.parent == Path("."):
-        return "## Top level"
-    return "## " + " / ".join(rel.parent.parts)
+        return ("## Top level", (0,))
+
+    labels: list[str] = []
+    for part in rel.parent.parts:
+        label = folder_label(part)
+        if label:
+            labels.append(label)
+
+    if not labels:
+        return ("## Top level", (0,))
+
+    title = "## " + " → ".join(labels)
+    sort_key = section_sort_key(rel.parent.parts)
+    return (title, sort_key)
+
+
+def section_sort_key(parts: tuple[str, ...]) -> tuple[int, ...]:
+    key: list[int] = []
+    for part in parts:
+        m = re.match(r"^(\d+)", part)
+        key.append(int(m.group(1)) if m else 999)
+    return tuple(key)
 
 
 def build_index(topic: str) -> str:
     topic_root = ROOT / topic
+    index_file = topic_root / "INDEX.md"
     title = TOPIC_TITLES[topic]
     lines = [
         f"# {title} — Index",
@@ -95,41 +228,33 @@ def build_index(topic: str) -> str:
         "Navigation only — note bodies are not modified.",
         "",
         "## Vault",
-        VAULT_LINK,
+        md_link(index_file, ROOT / "README.md", "Cyber_Security_Notes"),
         "",
         "## Entry points",
     ]
+
     entry = TOPIC_ENTRY.get(topic, [])
     if entry:
-        lines.extend(entry)
+        for rel_path, label in entry:
+            target = topic_root / rel_path
+            if target.exists() or topic == "WAPT":
+                lines.append(md_link(index_file, target, label))
     else:
         lines.append("- _(none yet)_")
 
     if topic == "WAPT":
+        htb = ROOT / "HTB" / "WEB PENETRATION TESTER" / "WEB PENETRATION TESTER.md"
         lines.extend(
             [
                 "",
                 "## Status",
                 "",
                 "Placeholder for future **Web Application Penetration Testing** notes.",
-                "Related material today lives under [[../HTB/WEB PENETRATION TESTER/WEB PENETRATION TESTER|HTB — Web Penetration Tester]].",
+                "",
+                md_link(index_file, htb, "HTB — Web Penetration Tester (current material)"),
             ]
         )
-        lines.extend(
-            [
-                "",
-                "## Vault maintenance",
-                "",
-                "- [[../vault-sessions/README|vault-sessions — structural scripts]]",
-                "",
-                "## Other topics",
-                "",
-            ]
-        )
-        for other in TOPICS:
-            if other != topic:
-                lines.append(f"- [[../{other}/INDEX|{other}]]")
-        lines.append("")
+        lines.extend(vault_footer(index_file, topic))
         return "\n".join(lines)
 
     if topic == "tools":
@@ -140,27 +265,11 @@ def build_index(topic: str) -> str:
                 "",
                 "_Add per-tool or cheat-sheet notes here as you create them._",
                 "",
-                "Vault automation: [[../vault-sessions/README|vault-sessions]]",
             ]
         )
-        lines.extend(
-            [
-                "",
-                "## Vault maintenance",
-                "",
-                "- [[../vault-sessions/README|vault-sessions — structural scripts]]",
-                "",
-                "## Other topics",
-                "",
-            ]
-        )
-        for other in TOPICS:
-            if other != topic:
-                lines.append(f"- [[../{other}/INDEX|{other}]]")
-        lines.append("")
+        lines.append(md_link(index_file, ROOT / "vault-sessions" / "README.md", "vault-sessions"))
+        lines.extend(vault_footer(index_file, topic))
         return "\n".join(lines)
-
-    import os
 
     md_files: list[Path] = []
 
@@ -190,18 +299,21 @@ def build_index(topic: str) -> str:
                 continue
             md_files.append(p)
 
-    by_section: dict[str, list[str]] = {}
+    by_section: dict[tuple[str, tuple[int, ...]], list[tuple[tuple, str]]] = {}
     for md in md_files:
-        head = section_heading(md, topic_root)
-        by_section.setdefault(head, []).append(vault_rel_link(md, topic_root))
+        head, sort_key = section_heading(md, topic_root)
+        label = humanize_stem(md.stem)
+        line = md_link(index_file, md, label)
+        by_section.setdefault((head, sort_key), []).append((stem_sort_key(md.stem), line))
 
     if by_section:
         lines.append("")
         lines.append("## All notes")
-        for head in sorted(by_section.keys()):
+        for (head, _sk), items in sorted(by_section.items(), key=lambda x: x[0][1]):
             lines.append("")
             lines.append(head)
-            lines.extend(by_section[head])
+            for _, line in sorted(items, key=lambda x: x[0]):
+                lines.append(line)
 
     if topic == "AD-PenTest":
         lines.extend(
@@ -209,27 +321,36 @@ def build_index(topic: str) -> str:
                 "",
                 "## Windows path note",
                 "",
-                "Some very deep AD folders may be omitted from this auto-generated list. "
-                "Use [[AD PenTesting]] for the complete GitBook-style table of contents.",
+                "Some very deep AD folders may be omitted from this auto-generated list.",
+                md_link(
+                    index_file,
+                    topic_root / "AD PenTesting.md",
+                    "Open full GitBook table of contents",
+                ),
             ]
         )
 
-    lines.extend(
-        [
-            "",
-            "## Vault maintenance",
-            "",
-            "- [[../vault-sessions/README|vault-sessions — structural scripts]]",
-            "",
-            "## Other topics",
-            "",
-        ]
-    )
+    lines.extend(vault_footer(index_file, topic))
+    return "\n".join(lines)
+
+
+def vault_footer(index_file: Path, topic: str) -> list[str]:
+    out = [
+        "",
+        "## Vault maintenance",
+        "",
+        md_link(index_file, ROOT / "vault-sessions" / "README.md", "vault-sessions — structural scripts"),
+        "",
+        "## Other topics",
+        "",
+    ]
     for other in TOPICS:
         if other != topic:
-            lines.append(f"- [[../{other}/INDEX|{other}]]")
-    lines.append("")
-    return "\n".join(lines)
+            out.append(
+                md_link(index_file, ROOT / other / "INDEX.md", other)
+            )
+    out.append("")
+    return out
 
 
 def main() -> None:
