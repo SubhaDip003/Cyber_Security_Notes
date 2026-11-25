@@ -2,6 +2,8 @@
 
 Concise cybersecurity notes for learning, practice, and security mastery.
 
+**Managing this vault:** [USER-GUIDE.md](USER-GUIDE.md) — folders, images, INDEX/README, and daily workflows.
+
 ## Study topics
 
 | Topic | Index | Legacy / primary entry |

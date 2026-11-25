@@ -6,12 +6,11 @@ Navigation only — note bodies are not modified.
 - [Cyber_Security_Notes](../README.md)
 
 ## Entry points
-- [1.1 Cloud security fundamentals](CWL/Cloud%20Security%20Fundamentals/1.%20Intro/1.1%20Introduction%20to%20Cloud%20Computing%20%26%20Cloud%20Security%20Fundamentals.md)
 
 ## All notes
 
-## CWL → Cloud Security Fundamentals → 1 — Intro
-- [1.1 Introduction to Cloud Computing & Cloud Security Fundamentals](CWL/Cloud%20Security%20Fundamentals/1.%20Intro/1.1%20Introduction%20to%20Cloud%20Computing%20%26%20Cloud%20Security%20Fundamentals.md)
+## CWL → Cloud Security Fundamentals
+- [1. Introduction to Cloud Computing & Cloud Security Fundamentals](CWL/Cloud%20Security%20Fundamentals/1.%20Introduction%20to%20Cloud%20Computing%20%26%20Cloud%20Security%20Fundamentals.md)
 
 ## Vault maintenance
 
