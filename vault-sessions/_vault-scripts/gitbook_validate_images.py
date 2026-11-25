@@ -6,7 +6,7 @@ import os
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 ATTACHMENTS = ROOT / "attachments"
 
 MD_IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
@@ -20,7 +20,7 @@ def iter_md() -> list[Path]:
     for p in ROOT.rglob("*.md"):
         if not p.is_file():
             continue
-        if ".obsidian" in p.parts or "tools" in p.parts:
+        if ".obsidian" in p.parts or "tools" in p.parts or "vault-sessions" in p.parts:
             continue
         out.append(p)
     return out

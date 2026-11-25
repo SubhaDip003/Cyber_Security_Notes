@@ -13,9 +13,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 ATTACHMENTS = ROOT / "attachments"
-SKIP_PARTS = {".obsidian", "tools", ".git"}
+SKIP_PARTS = {".obsidian", "tools", "vault-sessions", ".git"}
 
 FIGURE_IMG_RE = re.compile(
     r"<figure>\s*<img\s+src=[\"']([^\"']+)[\"']\s*alt=[\"']([^\"']*)[\"']\s*>\s*<figcaption>.*?</figcaption>\s*</figure>",
@@ -290,7 +290,10 @@ def validate(stats_path: Path) -> dict:
     import subprocess
 
     result = subprocess.run(
-        [os.environ.get("PYTHON", "python"), str(ROOT / "tools" / "gitbook_validate_images.py")],
+        [
+            os.environ.get("PYTHON", "python"),
+            str(ROOT / "vault-sessions" / "_vault-scripts" / "gitbook_validate_images.py"),
+        ],
         capture_output=True,
         text=True,
         cwd=str(ROOT),
@@ -316,8 +319,8 @@ def main() -> None:
             md.write_text(updated, encoding="utf-8", newline="\n")
             migrator.stats.md_modified += 1
 
-    report_path = ROOT / "tools" / "migration_report.json"
-    validation = validate(ROOT / "tools" / "validation_report.txt")
+    report_path = ROOT / "vault-sessions" / "_vault-scripts" / "migration_report.json"
+    validation = validate(ROOT / "vault-sessions" / "_vault-scripts" / "validation_report.txt")
 
     summary = {
         "markdown_files_processed": migrator.stats.md_processed,

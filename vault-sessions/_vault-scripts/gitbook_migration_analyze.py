@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 ASSET_RE = re.compile(r"\.gitbook/assets/([^\"'>\s)]+)", re.I)
 IMG_SRC_RE = re.compile(r'<img[^>]+src=["\']([^"\']+)["\']', re.I)
@@ -17,7 +17,7 @@ def main() -> None:
     md_files = [
         p
         for p in ROOT.rglob("*.md")
-        if ".obsidian" not in p.parts and "tools" not in p.parts
+        if ".obsidian" not in p.parts and "tools" not in p.parts and "vault-sessions" not in p.parts
     ]
     gitbook_refs: set[str] = set()
     external_gitbook: set[str] = set()

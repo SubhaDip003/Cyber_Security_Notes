@@ -5,8 +5,8 @@ import os
 import sys
 from pathlib import Path, PureWindowsPath
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "vault-sessions" / "_vault-scripts"))
 
 from gitbook_fix_paths import (  # noqa: E402
     fix_attachment_path_refs,
@@ -31,7 +31,7 @@ def iter_all_md(root: Path) -> list[Path]:
         for name in filenames:
             if not name.endswith(".md"):
                 continue
-            if ".obsidian" in normal_dir or "\\tools\\" in normal_dir.replace("/", "\\"):
+            if ".obsidian" in normal_dir or "\\vault-sessions\\" in normal_dir.replace("/", "\\"):
                 continue
             found.append(Path(normal_dir) / name)
     return found

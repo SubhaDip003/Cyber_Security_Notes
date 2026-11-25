@@ -10,9 +10,9 @@ import shutil
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 ATTACHMENTS = ROOT / "attachments"
-SKIP_TOP = {".obsidian", "tools", "attachments", ".git"}
+SKIP_TOP = {".obsidian", "tools", "vault-sessions", "attachments", ".git"}
 
 PROJECTS = [
     "AD-PenTest",
@@ -61,8 +61,10 @@ def iter_markdown_files() -> list[Path]:
             for d in dirnames
             if d not in SKIP_TOP and not d.startswith(".")
         ]
-        if "\\tools\\" in normal_dir.replace("/", "\\") or "\\.obsidian\\" in normal_dir.replace(
-            "/", "\\"
+        if (
+            "\\tools\\" in normal_dir.replace("/", "\\")
+            or "\\vault-sessions\\" in normal_dir.replace("/", "\\")
+            or "\\.obsidian\\" in normal_dir.replace("/", "\\")
         ):
             continue
         for name in filenames:
